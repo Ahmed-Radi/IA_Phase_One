@@ -1,0 +1,35 @@
+﻿@model phase1.Models.product
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/productlayout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>product</h4>
+    <hr />
+
+
+
+    <p>@Html.DisplayFor(model => model.name)&nbsp;@Html.DisplayFor(model => model.price)&nbsp;EGP</p>
+    @*<img src="@Url.Content(@model.image)" width=50 />*@
+
+    <img src="@Url.Content(Model.image)" width="300" height="350" />
+
+
+    <p>@Html.DisplayFor(model => model.description)</p>
+
+    @*<img src="@Html.DisplayFor(model => model.image)" width=50/>*@
+
+
+    <p>
+
+        <a href="@Url.Action("Edit","products",new {id =  @Html.DisplayFor(model => model.Id) })" class="btn btn-primary" target="_blank"><span class="glyphicon glyphicon-plus"></span> Update</a>
+        <a href="@Url.Action("Delete","products",new {id =  @Html.DisplayFor(model => model.Id) })" class="btn btn-primary" target="_blank"><span class="glyphicon glyphicon-minus"></span> Delete</a>
+
+
+        @*@Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+            @Html.ActionLink("Back to List", "Index")*@
+    </p>
