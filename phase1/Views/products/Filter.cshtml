@@ -1,0 +1,46 @@
+﻿@model IEnumerable<phase1.Models.product>
+
+
+@{
+    ViewBag.Title = "Products";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Products</h2>
+@using (Html.BeginForm())
+
+{
+    <br />
+    <form class="navbar-form navbar-right" role="search">
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon">@@</span>
+                @Html.TextBox("search", null, new { Type = "text", @class = "form-control" })
+                <span class="input-group-btn">
+                    @Html.ActionLink("Add New Product", "Create", null, new { @class = "btn btn-primary" })
+                </span>
+            </div>
+        </div>
+    </form>
+    <br />
+}
+
+<table class="table">
+
+    @foreach (var item in Model)
+    {
+        <div class="col-sm-6 col-md-4">
+            <div class="thumbnail">
+                <a href="@Url.Action("Details","products")">
+                    <img src="@Url.Content(item.image)" alt="..." width="242" height="200">
+                </a>
+                <div class="caption">
+                    <a href="@Url.Action("Details","products",new {id=@item.Id })" class="btn btn-primary" role="button" target="_blank">Details</a>
+                    <h3>@item.price</h3>
+                    <h3>@item.name</h3>
+                </div>
+            </div>
+        </div>
+
+    }
+</table>

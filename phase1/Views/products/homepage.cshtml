@@ -1,0 +1,32 @@
+﻿@model IEnumerable<phase1.Models.product>
+
+@{
+    ViewBag.Title = "homepage";
+    Layout = "~/Views/Shared/productlayout.cshtml";
+}
+
+<h2>homepage</h2>
+
+<p style="position:absolute;right:105px;">
+    <a href="@Url.Action("Create","products")" class="btn btn-primary" target="_blank"><span class="glyphicon glyphicon-plus"></span> Add Product</a>
+</p>
+<br />
+<br />
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-sm-6 col-md-4">
+            <div class="thumbnail">
+                <img src="@Url.Content(item.image)" alt="...">
+                <div class="caption">
+                    <h3>@Url.Content(item.name)</h3>
+                    <p>@Url.Content(item.price)</p>
+                    <p><a href="@Url.Action("Details","products",new {id=@item.Id })" class="btn btn-primary" role="button" target="_blank">Details</a> </p>
+                </div>
+            </div>
+        </div>
+
+    }
+
+</div>

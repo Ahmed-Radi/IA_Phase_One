@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="storeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="category">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="number_of_products" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="products" Relationship="Self.FK__product__categor__286302EC" FromRole="category" ToRole="product" />
+  </EntityType>
+  <EntityType Name="product">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="price" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="image" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="description" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="category_id" Type="Int32" />
+    <NavigationProperty Name="category" Relationship="Self.FK__product__categor__286302EC" FromRole="product" ToRole="category" />
+  </EntityType>
+  <Association Name="FK__product__categor__286302EC">
+    <End Role="category" Type="Self.category" Multiplicity="0..1" />
+    <End Role="product" Type="Self.product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="category">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="product">
+        <PropertyRef Name="category_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="storeEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="categories" EntityType="Self.category" />
+    <EntitySet Name="products" EntityType="Self.product" />
+    <AssociationSet Name="FK__product__categor__286302EC" Association="Self.FK__product__categor__286302EC">
+      <End Role="category" EntitySet="categories" />
+      <End Role="product" EntitySet="products" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
